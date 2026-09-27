@@ -28,14 +28,14 @@ datasets/ (9 CSV)
 
 **4 Dimensions + 2 Facts** trong schema `warehouse`:
 
-| Bảng | Grain | Rows |
-|:---|:---|---:|
-| `dim_date` | 1 dòng / ngày (2016–2019) | 1,461 |
-| `dim_customer` | 1 dòng / `customer_unique_id` | 96,096 |
-| `dim_product` | 1 dòng / `product_id` | 32,951 |
-| `dim_seller` | 1 dòng / `seller_id` | 3,095 |
-| **`fact_sales`** | 1 dòng / order item | 112,650 |
-| **`fact_order_fulfillment`** | 1 dòng / order | 99,441 |
+| Bảng                         | Grain                         |    Rows |
+| :--------------------------- | :---------------------------- | ------: |
+| `dim_date`                   | 1 dòng / ngày (2016–2019)     |   1,461 |
+| `dim_customer`               | 1 dòng / `customer_unique_id` |  96,096 |
+| `dim_product`                | 1 dòng / `product_id`         |  32,951 |
+| `dim_seller`                 | 1 dòng / `seller_id`          |   3,095 |
+| **`fact_sales`**             | 1 dòng / order item           | 112,650 |
+| **`fact_order_fulfillment`** | 1 dòng / order                |  99,441 |
 
 - **`fact_sales`**: doanh thu sản phẩm — `price`, `freight_value`, `sales_amount`.
 - **`fact_order_fulfillment`**: logistics & thanh toán — SLA hours, `review_score`, `total_payment_value`, `is_on_time`.
@@ -44,11 +44,11 @@ datasets/ (9 CSV)
 
 Streamlit multi-page dashboard gồm 4 trang:
 
-| Trang | Nội dung |
-|:---|:---|
-| **Overview** | KPI tổng quan, doanh thu theo tháng, đơn hàng theo ngày trong tuần |
-| **Product** | Top danh mục, doanh thu vs số lượng, giá trung bình theo ngành hàng |
-| **Customer** | Phân bố khách hàng theo bang/thành phố, tỷ lệ mua lặp lại |
+| Trang               | Nội dung                                                                        |
+| :------------------ | :------------------------------------------------------------------------------ |
+| **Overview**        | KPI tổng quan, doanh thu theo tháng, đơn hàng theo ngày trong tuần              |
+| **Product**         | Top danh mục, doanh thu vs số lượng, giá trung bình theo ngành hàng             |
+| **Customer**        | Phân bố khách hàng theo bang/thành phố, tỷ lệ mua lặp lại                       |
 | **Service Quality** | Tỷ lệ giao đúng hạn, review score, thời gian giao theo bang, delivery vs review |
 
 ## Cấu trúc thư mục
@@ -116,13 +116,13 @@ streamlit run dashboard/app.py
 
 ## Công nghệ
 
-| Thành phần | Công nghệ |
-|:---|:---|
-| Database | PostgreSQL 14+ |
-| ETL | Python, psycopg2 (`copy_expert`) |
-| Dashboard | Streamlit, Plotly |
-| Data processing | pandas, SQLAlchemy |
-| Config | python-dotenv |
+| Thành phần      | Công nghệ                        |
+| :-------------- | :------------------------------- |
+| Database        | PostgreSQL 14+                   |
+| ETL             | Python, psycopg2 (`copy_expert`) |
+| Dashboard       | Streamlit, Plotly                |
+| Data processing | pandas, SQLAlchemy               |
+| Config          | python-dotenv                    |
 
 ## License
 
