@@ -10,22 +10,6 @@ Dữ liệu đi từ CSV thô qua staging, chuyển đổi vào Star Schema, ki�
 
 ![Kiến trúc tổng thể dự án](image/architecture.png)
 
-## Data Pipeline
-
-```text
-datasets/ (9 CSV)
-      │
-      ▼  load_staging.py ── COPY binary ──▶ staging schema (all TEXT)
-      │
-      ▼  olist_staging_views.sql ─────────▶ staging.vw_* (type cast, dedup, pre-agg)
-      │
-      ▼  load_warehouse.py ── 1 transaction ▶ warehouse schema (Star Schema)
-      │
-      ▼  validate_warehouse.py ───────────▶ 72 quality checks (69 PASS · 3 WARNING)
-      │
-      ▼  dashboard/ (Streamlit) ──────────▶ Interactive BI Dashboard
-```
-
 ## Star Schema
 
 ![Star Schema ERD](image/Untitled.png)
@@ -45,6 +29,8 @@ datasets/ (9 CSV)
 - **`fact_order_fulfillment`**: logistics & thanh toán — SLA hours, `review_score`, `total_payment_value`, `is_on_time`.
 
 ## Dashboard
+
+![Streamlit Dashboard](image/dashboard.png)
 
 Streamlit multi-page dashboard gồm 4 trang:
 
