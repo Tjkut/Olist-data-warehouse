@@ -4,6 +4,10 @@ Kho dữ liệu (Data Warehouse) và Dashboard phân tích cho bộ dữ liệu 
 
 Pipeline tự động chuyển 9 tệp CSV thô thành mô hình **Kimball Star Schema** trên PostgreSQL, kiểm định chất lượng với 72 automated checks, và trực quan hóa kết quả qua **Streamlit Dashboard** tương tác.
 
+## Kiến trúc dự án
+
+Dữ liệu đi từ CSV thô qua staging, chuyển đổi vào Star Schema, kiểm định chất lượng và hiển thị trên dashboard tương tác:
+
 ![Kiến trúc tổng thể dự án](image/architecture.png)
 
 ## Data Pipeline
