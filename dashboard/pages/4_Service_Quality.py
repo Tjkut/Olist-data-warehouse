@@ -12,28 +12,77 @@ from query import AVG_REVIEW_SCORE_QUERY, DELIVERY_TIME_VS_REVIEW_QUERY, AVG_DEL
 from charts import delivery_time_vs_review_scatter, delivery_time_by_state_map
 
 # ---------------------------------------------------------------------------
-# Custom CSS — Dark theme (đồng nhất với các trang khác)
+# Custom CSS — Light theme (đồng nhất với .streamlit/config.toml & charts.py)
 # ---------------------------------------------------------------------------
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
     .stApp {
-        background-color: #0F172A;
-        color: #F8FAFC;
+        background-color: #FFFFFF;
+        color: #31333F;
         font-family: 'Inter', sans-serif;
     }
-    [data-testid="stSidebar"] { background-color: #1E293B; }
-    [data-testid="stHeader"], [data-testid="stToolbar"] { background-color: #0F172A; }
+    [data-testid="stSidebar"] {
+        background-color: #F0F2F6;
+        border-right: 1px solid #E2E8F0;
+    }
+    [data-testid="stSidebar"] * {
+        color: #000000;
+    }
+    [data-testid="stSidebarNav"] a,
+    [data-testid="stSidebarNav"] a:visited,
+    [data-testid="stSidebarNav"] a span,
+    [data-testid="stSidebarNavLink"],
+    [data-testid="stSidebarNavLink"] span,
+    section[data-testid="stSidebar"] a,
+    section[data-testid="stSidebar"] a span {
+        color: #000000 !important;
+        font-weight: 500;
+    }
+    [data-testid="stSidebarNav"] a:hover span,
+    [data-testid="stSidebarNavLink"]:hover span,
+    section[data-testid="stSidebar"] a:hover span {
+        color: #FF4B4B !important;
+    }
+    [data-testid="stSidebarNav"] a[aria-current="page"] span,
+    [data-testid="stSidebarNavLink"][aria-current="page"] span,
+    section[data-testid="stSidebar"] a[aria-current="page"] span {
+        color: #000000 !important;
+        font-weight: 700 !important;
+    }
+    [data-testid="stHeader"],
+    [data-testid="stToolbar"] {
+        background-color: #FFFFFF;
+    }
     [data-testid="stMetric"] {
-        background-color: #1E293B;
-        border: 1px solid #334155;
+        background-color: #F0F2F6;
+        border: 1px solid #E2E8F0;
         border-radius: 12px;
         padding: 20px 24px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
-    [data-testid="stMetricLabel"] { color: #94A3B8; font-size: 0.9rem; font-weight: 500; }
-    [data-testid="stMetricValue"] { color: #F8FAFC; font-size: 1.8rem; font-weight: 700; }
-    [data-testid="stRadio"] label { color: #F8FAFC; }
-    hr { border-color: #334155; }
+    [data-testid="stMetricLabel"] {
+        color: #64748B;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    [data-testid="stMetricValue"] {
+        color: #1E293B;
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+    [data-testid="stRadio"] label {
+        color: #31333F;
+    }
+    hr {
+        border-color: #E2E8F0;
+    }
+    .stAlert {
+        background-color: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        color: #31333F;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -158,15 +207,15 @@ if df_delivery_state is not None and not df_delivery_state.empty:
         }
         rows_html = ""
         for i, (code, name) in enumerate(sorted(_STATE_NAMES.items())):
-            bg = "#1E293B" if i % 2 == 0 else "#0F172A"
+            bg = "#F8FAFC" if i % 2 == 0 else "#FFFFFF"
             rows_html += (
                 f"<div style='display:flex; gap:24px; "
                 f"padding:6px 12px; background:{bg}; border-radius:4px;'>"
-                f"<span style='font-weight:700; color:#93C5FD; min-width:40px;'>{code}</span>"
-                f"<span style='color:#CBD5E1;'>{name}</span></div>"
+                f"<span style='font-weight:700; color:#FF4B4B; min-width:40px;'>{code}</span>"
+                f"<span style='color:#31333F;'>{name}</span></div>"
             )
         st.markdown(
-            f"<div style='max-height:700px; overflow-y:auto; border:1px solid #334155; "
+            f"<div style='max-height:700px; overflow-y:auto; border:1px solid #E2E8F0; "
             f"border-radius:8px; padding:4px;'>{rows_html}</div>",
             unsafe_allow_html=True,
         )
@@ -185,7 +234,7 @@ else:
 # ---------------------------------------------------------------------------
 st.divider()
 st.markdown(
-    "<p style='text-align:center; color:#475569; font-size:0.8rem;'>"
+    "<p style='text-align:center; color:#64748B; font-size:0.8rem;'>"
     "Olist E-commerce Analytics · Nguồn dữ liệu: warehouse schema · "
     "Grain: fact_order_fulfillment (review_score)"
     "</p>",

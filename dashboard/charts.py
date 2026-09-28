@@ -18,13 +18,13 @@ from pathlib import Path
 # Color palette & layout defaults
 # ---------------------------------------------------------------------------
 COLORS = {
-    "primary": "#6366F1",       # Indigo-500
-    "primary_light": "#A5B4FC",  # Indigo-300
-    "accent": "#F59E0B",        # Amber-500
-    "bg": "#0F172A",            # Slate-900
-    "card_bg": "#1E293B",       # Slate-800
-    "text": "#F8FAFC",          # Slate-50
-    "grid": "#334155",          # Slate-700
+    "primary": "#FF4B4B",        # Primary Red/Coral from .streamlit/config.toml
+    "primary_light": "#FFA8A8",  # Light coral
+    "accent": "#F59E0B",         # Amber-500
+    "bg": "#FFFFFF",             # Pure white from config.toml
+    "card_bg": "#F0F2F6",        # Secondary bg from config.toml
+    "text": "#31333F",           # Dark text from config.toml
+    "grid": "#E2E8F0",           # Slate-200 border / grid lines
 }
 
 _LAYOUT_DEFAULTS = dict(
@@ -41,14 +41,16 @@ def _apply_axis_style(fig: go.Figure) -> go.Figure:
     fig.update_xaxes(
         showgrid=False,
         linecolor=COLORS["grid"],
-        tickfont=dict(size=11),
+        tickfont=dict(size=11, color=COLORS["text"]),
+        title_font=dict(color=COLORS["text"]),
     )
     fig.update_yaxes(
         showgrid=True,
         gridcolor=COLORS["grid"],
         gridwidth=0.5,
         linecolor=COLORS["grid"],
-        tickfont=dict(size=11),
+        tickfont=dict(size=11, color=COLORS["text"]),
+        title_font=dict(color=COLORS["text"]),
     )
     return fig
 
@@ -75,7 +77,7 @@ def monthly_revenue_chart(df: pd.DataFrame) -> go.Figure:
         line=dict(color=COLORS["primary"], width=2.5, shape="spline"),
         marker=dict(size=5, color=COLORS["primary_light"]),
         fill="tozeroy",
-        fillcolor="rgba(99,102,241,0.15)",
+        fillcolor="rgba(255, 75, 75, 0.12)",
         hovertemplate="<b>%{x}</b><br>Doanh thu: R$ %{y:,.2f}<extra></extra>",
     ))
 
@@ -148,7 +150,7 @@ def orders_by_day_of_week_chart(df: pd.DataFrame) -> go.Figure:
         name="Số đơn hàng",
         marker=dict(
             color=df["total_orders"],
-            colorscale=[[0, "#1E3A5F"], [0.5, COLORS["accent"]], [1, "#F97316"]],
+            colorscale=[[0, "#FEE2E2"], [0.5, "#F87171"], [1, COLORS["primary"]]],
             line=dict(width=0),
             cornerradius=6,
         ),
@@ -457,7 +459,7 @@ def delivery_time_vs_review_scatter(df: pd.DataFrame) -> go.Figure:
                     size=8,
                     color=colors.get(status, "#93C5FD"),
                     opacity=0.85,
-                    line=dict(width=0.5, color="#1E293B"),
+                    line=dict(width=0.5, color="#FFFFFF"),
                 ),
                 customdata=df_sub["order_count"],
                 hovertemplate=(
@@ -482,7 +484,7 @@ def delivery_time_vs_review_scatter(df: pd.DataFrame) -> go.Figure:
             mode="lines",
             name="Trendline",
             showlegend=False,
-            line=dict(color="#94A3B8", width=2, dash="dash"),
+            line=dict(color="#64748B", width=2, dash="dash"),
             hoverinfo="skip",
         ))
 
@@ -601,7 +603,7 @@ def delivery_time_by_state_map(df: pd.DataFrame) -> go.Figure:
         lon=label_lons,
         text=label_texts,
         mode="text",
-        textfont=dict(size=10, color="#F8FAFC", family="Inter, sans-serif"),
+        textfont=dict(size=10, color="#1E293B", family="Inter, sans-serif"),
         showlegend=False,
         hoverinfo="skip",
     ))
